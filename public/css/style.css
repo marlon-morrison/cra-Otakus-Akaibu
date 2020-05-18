@@ -23,6 +23,10 @@ header a:hover {
     text-decoration: none;
     text-shadow: #d465ef 1px 6px 5px;
 }
+header a:focus {
+    color: #fff;
+    text-decoration: none;
+  }
 @media (max-width: 528px) {
     header a {
         font-size: calc(15px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));

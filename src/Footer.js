@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="container outsites">
         <div className="row">
           <div className="col-sm-4">
-            <h3>anime streming sites</h3>
+            <h3>anime streaming sites</h3>
             <hr/>
             <ul>
               <li><a target="_blank" href="https://www.funimation.com/">funimation</a></li>

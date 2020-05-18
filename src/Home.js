@@ -44,7 +44,7 @@ const Home = () => {
               <img src="media/hero.jpg" className="hidden-xs img-responsive" alt=""/>
               <div className="info">
                   <p>Knowing you’re different is only the beginning.</p>
-                  <button><Link to="/find_character">Find Character</Link></button>
+                  <button><Link to="/find_Acharacter">Find Character</Link></button>
               </div>
             </div>
           </div>
@@ -54,11 +54,19 @@ const Home = () => {
         <div className="container">
           <div className="row">
             <h2>top viewed characters</h2>
-            {Acharacters}
+            <div className="slider">
+              <div className="slides">
+                {Acharacters}
+              </div>
+            </div>
           </div>
           <div className="row">
             <h2>top viewed fanart</h2>
-            {fanart}
+            <div className="slider">
+              <div className="slides">
+                {fanart}
+              </div>
+            </div>
           </div>
         </div>
       </main>
