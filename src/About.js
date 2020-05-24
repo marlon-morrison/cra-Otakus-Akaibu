@@ -8,7 +8,7 @@ const About = () => {
 
 
   useEffect(() => {
-    fetch(`http://localhost:5001/api/comments`)
+    fetch(`http://localhost:5000/api/Acharacters/comments/all`)
     .then(respose => respose.json())
     .then(data => {
       setComments(data.map(comment => (
@@ -27,7 +27,7 @@ const About = () => {
   const addComment = event => {
     console.log(commentE.value);
     
-    fetch(`http://localhost:5001/api/comments/create/${commentE.value}`, {method: 'POST'})
+    fetch(`http://localhost:5000/api/Acharacters/comments/create/${commentE.value}`, {method: 'POST'})
     .then(respose => respose.json())
     .then(data => {
       console.log(data);
