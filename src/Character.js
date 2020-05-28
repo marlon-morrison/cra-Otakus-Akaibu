@@ -155,6 +155,8 @@ const ACharacter = () => {
 
     const page = event => {
         num = event
+        console.log(num);
+        
         fetch(`http://localhost:5000/api/Acharacters/page/${num}`)
         .then(respose => respose.json())
         .then(data => {
@@ -177,11 +179,11 @@ const ACharacter = () => {
     }
 
     const paginationRender = (
-        <div className="flex-container">
-          <div className="next">
+        <>
+            <div className="next">
                 {number}
-          </div>
-        </div>
+            </div>
+        </>
     );
 
     return (
