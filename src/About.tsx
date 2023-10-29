@@ -11,7 +11,7 @@ const About = () => {
     fetch(`http://localhost:5000/api/Acharacters/comments/all`)
     .then(respose => respose.json())
     .then(data => {
-      setComments(data.map(comment => (
+      setComments(data.map((comment: any) => (
         <div className="row">
           <div className="col-sm-12 comment">
             <img src="/media/mr-anonymous.png" alt=""/>
