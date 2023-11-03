@@ -9,10 +9,10 @@ const Social = () => {
         .then(data => {
             console.log(data.reviews);
             
-          setCharacters(data.reviews.map(person => (
-            <div class="row">
-                <div class="col-sm-12 comment">
-                    <img src="media/mr-anonymous.png" alt=""/>
+          setCharacters(data.reviews.map((person: any) => (
+            <div className="row">
+                <div className="col-sm-12 comment">
+                    <img src={require("./media/mr-anonymous.png")} alt=""/>
                     <h3>anonymous</h3>
                     <p>{person.content}</p>
                     <hr/>
@@ -25,9 +25,9 @@ const Social = () => {
   return (
     <div className="Social">
          <main>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
+        <div className="container">
+            <div className="row">
+                <div className="col-sm-12">
                     <h2>social</h2>
                     {characters}
                 </div>

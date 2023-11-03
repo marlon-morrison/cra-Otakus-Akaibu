@@ -4,55 +4,56 @@ const Fanart = () => {
     const [fanart, setFanart] = useState([]);
     const [Acharacters, setCharacters] = useState([]);
     const [animes, setAnimes] = useState([]);
-    
-    let rank = document.getElementById("rank-select");
-    let animeS = document.getElementById("anime-select")
-    let characterS = document.getElementById("character-select")
+
+    var rank = (document.getElementById('rank-select') as HTMLSelectElement);
+
+    let animeS = (document.getElementById("anime-select") as HTMLSelectElement);
+    let characterS = (document.getElementById("character-select") as HTMLSelectElement);
     let maxPages = 10;
     let num = 1;
     let number = [];
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/api/Acharacters/fanart/page/${num}`)
+    useEffect(() => { 
+        fetch(`http://localhost:5000/api/Acharacters/FanartPages?page=${num}`)
         .then(respose => respose.json())
         .then(data => {
-            setFanart(data.map((character: { fanart: string | undefined; }) => (
+            setFanart(data.map((character: any) => (
                 <div className="col-sm-5 col-md-4 col-lg-3">
-                    <a href={character.fanart} target="_blank" ><img src={character.fanart} alt=""/></a>
+                    <a href={character.fanart} target="_blank" ><img src={require("."+character.fanart)} alt=""/></a>
                 </div>
             )));
         });
     },[]);
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/Acharacters")
+        fetch("http://localhost:5000/api/Acharacters/FindAll")
         .then(respose => respose.json())
         .then(data => {
-            setCharacters(data.map(character => (
+            setCharacters(data.map((character: any) => (
             <option value={character.id}>{character.fname} {character.lname}</option>
             )));
         });
     },[]);
   
     useEffect(() => {
-        fetch("http://localhost:5000/api/Acharacters/animes")
+        fetch("http://localhost:5000/api/Acharacters/FindAllAnimes")
         .then(respose => respose.json())
         .then(data => {
-            setAnimes(data.map(character => (
+            setAnimes(data.map((character: any) => (
                 <option value={character.anime}>{character.anime}</option>
             )));
         });
     },[]);
   
-    const filterAnime = event => {
-        console.log(animeS.value);
-        fetch(`http://localhost:5000/api/Acharacters/fanart/anime/${animeS.value}`)
+    const filterAnime = (event: { preventDefault: () => void; }) => {
+        console.log(animeS);
+        fetch(`http://localhost:5000/api/Acharacters/FilterByAnimeF?anime=${animeS.value}`)
         .then(respose => respose.json())
         .then(data => {
-            setFanart(data.map(character => (
+            setFanart(data.map((character: any) => (
                 <div className="col-sm-3">
                     <div>
-                        <a href={character.fanart} target="_blank" ><img src={character.fanart} alt=""/></a>
+                        <a href={character.fanart} target="_blank" ><img src={require("."+character.fanart)} alt=""/></a>
                     </div>
                 </div>
             )));
@@ -60,42 +61,42 @@ const Fanart = () => {
         event.preventDefault()
     }
 
-    const filterCharacters = event => {
-        fetch(`http://localhost:5000/api/Acharacters/fanart/Acharacter/${characterS.value}`)
+    const filterCharacters = (event: any) => {
+        fetch(`http://localhost:5000/api/Acharacters/FilterByACharacter?id=${characterS.value}`)
         .then(respose => respose.json())
         .then(data => {
-            setFanart(data.map(character => (
+            setFanart(data.map((character: any) => (
                 <div className="col-sm-3">
                     <div>
-                        <a href={character.fanart} target="_blank" ><img src={character.fanart} alt=""/></a>
+                        <a href={character.fanart} target="_blank" ><img src={require("."+character.fanart)} alt=""/></a>
                     </div>
                 </div>
             )));
         });   
     }
 
-    const filterRank = event => {
+    const filterRank = (event: any) => {
         if (rank.value == "non-sort"){
-            fetch("http://localhost:5000/api/Acharacters/fanart")
+            fetch("http://localhost:5000/api/Acharacters/FanartPages?page=1")
             .then(respose => respose.json())
             .then(data => {
-                setFanart(data.map(character => (
+                setFanart(data.map((character: any) => (
                     <div className="col-sm-3">
                         <div>
-                            <a href={character.fanart} target="_blank" ><img src={character.fanart} alt=""/></a>
+                            <a href={character.fanart} target="_blank" ><img src={require("."+character.fanart)} alt=""/></a>
                         </div>
                     </div>
                 )));
                });
         }
         if (rank.value == "sort") {
-            fetch("http://localhost:5000/api/Acharacters/fanart/rank")
+            fetch("http://localhost:5000/api/Acharacters/FilterByRank")
             .then(respose => respose.json())
             .then(data => {
-                setFanart(data.map(character => (
+                setFanart(data.map((character: any) => (
                     <div className="col-sm-3">
                         <div> 
-                            <a href={character.fanart} target="_blank" ><img src={character.fanart} alt=""/></a>
+                            <a href={character.fanart} target="_blank" ><img src={require("."+character.fanart)} alt=""/></a>
                         </div>
                     </div>
                 )));
@@ -103,14 +104,14 @@ const Fanart = () => {
         }
     }
 
-    const page = event => {
+    const page = (event: number) => {
         num = event
-        fetch(`http://localhost:5000/api/Acharacters/fanart/page/${num}`)
+        fetch(`http://localhost:5000/api/Acharacters/FanartPages?page=${num}`)
         .then(respose => respose.json())
         .then(data => {
-            setFanart(data.map(character => (
+            setFanart(data.map((character: any) => (
                 <div className="col-sm-5 col-md-4 col-lg-3">
-                    <a href={character.fanart} target="_blank" ><img src={character.fanart} alt=""/></a>
+                    <a href={character.fanart} target="_blank" ><img src={require("."+character.fanart)} alt=""/></a>
                 </div>
             )));
         });
@@ -133,24 +134,24 @@ const Fanart = () => {
   return (
     <div className="Fanart">
             <main>
-        <div class="container">
-            <div class="row">
+        <div className="container">
+            <div className="row">
                 <h2>fanart select</h2>
-                <div class="col-sm-12 select">
-                    <label for="anime-select">select by anime:</label>
+                <div className="col-sm-12 select">
+                    <label htmlFor="anime-select">select by anime:</label>
                     <select name="animes" id="anime-select">
                         <option value="">Please select option here</option>
                         {animes}
                     </select>
                     <button onClick={filterAnime}>filter</button>
-                    <label for="character-select">select by character:</label>
+                    <label htmlFor="character-select">select by character:</label>
                     <select name="character" id="character-select">
                         <option value="">Please select option here</option>
                         {Acharacters}
                     </select>
                     <button onClick={filterCharacters}>filter</button>
                     <br/>
-                    <label for="rank-select">select by rank:</label>
+                    <label htmlFor="rank-select">select by rank:</label>
                     <select name="rank" id="rank-select">
                         <option value="">Please select option here</option>
                         <option value="non-sort">non-rank</option>
@@ -160,8 +161,8 @@ const Fanart = () => {
                     <hr/>
                 </div>
             </div>
-            <div class="profile">
-                <div class="container">
+            <div className="profile">
+                <div className="container">
                     <div className="row slider">
                         <div className="slides">
                             {fanart}

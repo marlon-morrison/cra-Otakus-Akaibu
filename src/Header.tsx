@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="Header">
       <header>
-        <a name="top"></a>
+        <a className="top"></a>
         <div className="container">
             <div className="row">
                 <div className="col-xs-12 col-sm-5 col-lg-5">
@@ -13,7 +13,7 @@ const Header = () => {
                 </div>
                 <div className="col-xs-12 col-sm-7 col-lg-7">
                     <ul>
-                        <Link to="/">Home</Link>
+                        <Link to="/cra-Otakus-Akaibu">Home</Link>
                         <Link to="/about">About</Link>
                         <Link to="/find_Acharacter">Find Character</Link>
                         <Link to="/fanart">Fanart</Link>

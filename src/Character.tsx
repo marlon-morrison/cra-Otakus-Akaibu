@@ -6,23 +6,23 @@ const ACharacter = () => {
     const [colors, setColors] = useState([]);
     const [animes, setAnimes] = useState([]);
 
-    let animeS = document.getElementById("anime-select")
-    let hairC = document.getElementById("hair-select")
-    let eyeC = document.getElementById("eye-select")
-    let roleS = document.getElementById("role-select")
-    let genderS = document.getElementById("gender-select")
+    var animeS = (document.getElementById("anime-select")as HTMLSelectElement);
+    var hairC = (document.getElementById("hair-select")as HTMLSelectElement);
+    var eyeC = (document.getElementById("eye-select")as HTMLSelectElement);
+    var roleS = (document.getElementById("role-select")as HTMLSelectElement);
+    var genderS = (document.getElementById("gender-select")as HTMLSelectElement);
     let maxPages = 10;
-    let num = 1;
+    let num = 1; 
     let number = [];
     
     useEffect(() => {
-        fetch(`http://localhost:5000/api/Acharacters/page/${num}`)
+        fetch(`http://localhost:5000/api/Acharacters/AcharacterPages?page=${num}`)
         .then(respose => respose.json())
         .then(data => {            
             setACharacters(data.map((Acharacter: any) => (
             <div className="col-sm-3">
                 <div>
-                    <Link to={`/find_Acharacter/${Acharacter.id}`}><img src={Acharacter.image} alt=""/></Link>
+                    <Link to={`/find_Acharacter/${Acharacter.id}`}><img src={require("."+Acharacter.image)} alt=""/></Link>
                 </div>
                 <br/>
                 <p>{Acharacter.fname} {Acharacter.lname}</p>
@@ -32,7 +32,7 @@ const ACharacter = () => {
     },[]);
     
     useEffect(() => {
-        fetch("http://localhost:5000/api/Acharacters/colors")
+        fetch("http://localhost:5000/api/Acharacters/FindAllColors")
         .then(respose => respose.json())
         .then(data => {
             setColors(data.map((Acharacter: any) => (
@@ -42,7 +42,7 @@ const ACharacter = () => {
     },[]);
 
     useEffect(() => {
-    fetch("http://localhost:5000/api/Acharacters/animes")
+    fetch("http://localhost:5000/api/Acharacters/FindAllAnimes")
     .then(respose => respose.json())
     .then(data => {
         setAnimes(data.map((Acharacter: any) => (
@@ -52,13 +52,15 @@ const ACharacter = () => {
     },[]);
 
     const filterAnime = (event: any) => {
-        fetch(`http://localhost:5000/api/Acharacters/filter/anime/${animeS.value}`)
+        console.log(animeS.value);
+        
+        fetch(`http://localhost:5000/api/Acharacters/FilterByAnime?anime=${animeS.value}`)
         .then(respose => respose.json())
         .then(data => {
             setACharacters(data.map((Acharacter: any) => (
                 <div className="col-sm-3">
                     <div>
-                    <Link to={`/find_Acharacter/${Acharacter.id}`}><img src={Acharacter.image} alt=""/></Link>
+                    <Link to={`/find_Acharacter/${Acharacter.id}`}><img src={require("."+Acharacter.image)} alt=""/></Link>
                     </div>
                     <br/>
                     <p>{Acharacter.fname} {Acharacter.lname}</p>
@@ -69,13 +71,13 @@ const ACharacter = () => {
     }
 
     const filterEye = (event: any) => {
-        fetch(`http://localhost:5000/api/Acharacters/filter/eye-color/${eyeC.value}`)
+        fetch(`http://localhost:5000/api/Acharacters/FilterByEyeC?eyec=${eyeC.value}`)
         .then(respose => respose.json())
         .then(data => {
           setACharacters(data.map((Acharacter: any) => (
               <div className="col-sm-3">
                   <div>
-                  <Link to={`/find_Acharacter/${Acharacter.id}`}><img src={Acharacter.image} alt=""/></Link>
+                  <Link to={`/find_Acharacter/${Acharacter.id}`}><img src={require("."+Acharacter.image)} alt=""/></Link>
                   </div>
                   <br/>
                   <p>{Acharacter.fname} {Acharacter.lname}</p>
@@ -86,13 +88,13 @@ const ACharacter = () => {
     }
 
     const filterHair = (event: any) => {
-        fetch(`http://localhost:5000/api/Acharacters/filter/hair-color/${hairC.value}`)
+        fetch(`http://localhost:5000/api/Acharacters/FilterByHairC?hairc=${hairC.value}`)
         .then(respose => respose.json())
         .then(data => {
         setACharacters(data.map((Acharacter: any) => (
             <div className="col-sm-3">
                 <div>
-                <Link to={`/find_Acharacter/${Acharacter.id}`}><img src={Acharacter.image} alt=""/></Link>
+                <Link to={`/find_Acharacter/${Acharacter.id}`}><img src={require("."+Acharacter.image)} alt=""/></Link>
                 </div>
                 <br/>
                 <p>{Acharacter.fname} {Acharacter.lname}</p>
@@ -103,13 +105,13 @@ const ACharacter = () => {
     }
 
     const filterRole = (event: any) => {
-        fetch(`http://localhost:5000/api/Acharacters/filter/role/${roleS.value}`)
+        fetch(`http://localhost:5000/api/Acharacters/FilterByRole?role=${roleS.value}`)
         .then(respose => respose.json())
         .then(data => {
         setACharacters(data.map((Acharacter: any) => (
             <div className="col-sm-3">
                 <div>
-                <Link to={`/find_Acharacter/${Acharacter.id}`}><img src={Acharacter.image} alt=""/></Link>
+                <Link to={`/find_Acharacter/${Acharacter.id}`}><img src={require("."+Acharacter.image)} alt=""/></Link>
                 </div>
                 <br/>
                 <p>{Acharacter.fname} {Acharacter.lname}</p>
@@ -120,13 +122,13 @@ const ACharacter = () => {
     }
 
     const filterGender = (event: any) => {
-        fetch(`http://localhost:5000/api/Acharacters/filter/gender/${genderS.value}`)
+        fetch(`http://localhost:5000/api/Acharacters/FilterByGender?gender=${genderS.value}`)
         .then(respose => respose.json())
         .then(data => {
         setACharacters(data.map((Acharacter: any) => (
             <div className="col-sm-3">
                 <div>
-                <Link to={`/find_Acharacter/${Acharacter.id}`}><img src={Acharacter.image} alt=""/></Link>
+                <Link to={`/find_Acharacter/${Acharacter.id}`}><img src={require("."+Acharacter.image)} alt=""/></Link>
                 </div>
                 <br/>
                 <p>{Acharacter.fname} {Acharacter.lname}</p>
@@ -137,13 +139,15 @@ const ACharacter = () => {
     }
 
     const filterAll = (event: any) => {
-        fetch(`http://localhost:5000/api/Acharacters/filter/all/${animeS.value}/${eyeC.value}/${hairC.value}/${roleS.value}/${genderS.value}`)
+        console.log(`http://localhost:5000/api/Acharacters/FilterByAll?anime=${(animeS.value)}&eyec=${eyeC.value}&hairc=${hairC.value}&role=${roleS.value}&gender=${genderS.value}`);
+        
+        fetch(`http://localhost:5000/api/Acharacters/FilterByAll?anime=${animeS.value}&eyec=${eyeC.value}&hairc=${hairC.value}&role=${roleS.value}&gender=${genderS.value}`)
         .then(respose => respose.json())
         .then(data => {
         setACharacters(data.map((Acharacter: any) => (
             <div className="col-sm-3">
                 <div>
-                <Link to={`/find_Acharacter/${Acharacter.id}`}><img src={Acharacter.image} alt=""/></Link>
+                <Link to={`/find_Acharacter/${Acharacter.id}`}><img src={require("."+Acharacter.image)} alt=""/></Link>
                 </div>
                 <br/>
                 <p>{Acharacter.fname} {Acharacter.lname}</p>
@@ -157,13 +161,13 @@ const ACharacter = () => {
         num = event
         console.log(num);
         
-        fetch(`http://localhost:5000/api/Acharacters/page/${num}`)
+        fetch(`http://localhost:5000/api/Acharacters/AcharacterPages?id=${num}`)
         .then(respose => respose.json())
         .then(data => {
         setACharacters(data.map((Acharacter: any) => (
             <div className="col-sm-3">
                 <div>
-                    <Link to={`/find_Acharacter/${Acharacter.id}`}><img src={Acharacter.image} alt=""/></Link>
+                    <Link to={`/find_Acharacter/${Acharacter.id}`}><img src={require("."+Acharacter.image)} alt=""/></Link>
                 </div>
                 <br/>
                 <p>{Acharacter.fname} {Acharacter.lname}</p>
@@ -210,19 +214,19 @@ const ACharacter = () => {
                     <label htmlFor="eye-select">select by eye color:</label>
                     <select name="eye" id="eye-select">
                             <option value="">Please select option here</option>
-                            {colors}
+                            {colors} 
                     </select>
                     <button onClick={filterEye}>filter</button>
 
-                    <label for="role-select">select by chara. role:</label>
+                    <label htmlFor="role-select">select by chara. role:</label>
                     <select name="role" id="role-select">
                             <option value="">Please select option here</option>
-                            <option value="Main Character">Main Character</option>
-                            <option value="Side Character">Side Character</option>
+                            <option value="Main">Main Character</option>
+                            <option value="Side">Side Character</option>
                     </select>
                     <button onClick={filterRole}>filter</button>
 
-                    <label for="gender-select">select by gender:</label>
+                    <label htmlFor="gender-select">select by gender:</label>
                     <select name="gender" id="gender-select">
                             <option value="">Please select option here</option>
                             <option value="M">Male</option>

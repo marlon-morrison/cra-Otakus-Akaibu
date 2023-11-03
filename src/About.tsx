@@ -14,7 +14,7 @@ const About = () => {
       setComments(data.map((comment: any) => (
         <div className="row">
           <div className="col-sm-12 comment">
-            <img src="/media/mr-anonymous.png" alt=""/>
+            <img src={require("./media/mr-anonymous.png")} alt=""/>
             <h3>anonymous</h3>
             <p>{comment.response}</p>
             <hr/>
@@ -24,10 +24,10 @@ const About = () => {
     });
   },[]);
 
-  const addComment = event => {
-    console.log(commentE.value);
+  const addComment = () => {
+    console.log(commentE);
     
-    fetch(`http://localhost:5000/api/Acharacters/comments/create/${commentE.value}`, {method: 'POST'})
+    fetch(`http://localhost:5000/api/Acharacters/comments/create/${commentE}`, {method: 'POST'})
     .then(respose => respose.json())
     .then(data => {
       console.log(data);
@@ -48,7 +48,7 @@ const About = () => {
           </div>
           <div className="row">
               <div className="col-sm-12">
-                  <textarea name="" id='commentS' cols="30" rows="11"></textarea>
+                  <textarea name="" id='commentS' cols={30} rows={11}></textarea>
                   <button onClick={addComment}>submit</button>
               </div>
           </div>

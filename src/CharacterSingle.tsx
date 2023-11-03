@@ -1,20 +1,21 @@
-import React , {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
+import { useParams } from 'react-router-dom';
 
-const ACharacterSingle = (props) => {
+const ACharacterSingle = () => { 
+    const {id} = useParams();
     const [Acharacters, setAcharacters] = useState([]);
 
     useEffect(() => {
-        const {id} = props.match.params
         console.log(id);
         
-        fetch(`http://localhost:5000/api/Acharacters/anime/${id}`)
+        fetch(`http://localhost:5000/api/Acharacters/FindById?id=${id}`)
         .then(respose => respose.json())
         .then(data => {
-            setAcharacters(data.map(character => (
+            setAcharacters(data.map((character: any) => (
                 <>
                 <div className="col-sm-4">
                     <h2>{character.fname} {character.lname}</h2>
-                    <img src={character.image} className=" img-responsive" alt=""/>
+                    <img src={require("."+character.image)} className=" img-responsive" alt=""/>
                 </div>
                 <div className="col-sm-8">
                     <hr/>
@@ -28,7 +29,7 @@ const ACharacterSingle = (props) => {
                     <hr/>
                     <p>Race: {character.race}</p>
                     <hr/>
-                    <p>Role: {character.role}</p>
+                    <p>Role: {character.roles}</p>
                     <hr/>
                     <p>Anime: {character.anime}</p>
                     <hr/>

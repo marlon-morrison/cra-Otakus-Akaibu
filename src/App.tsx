@@ -3,9 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './Header';
 import Home from './Home';
 import About from './About';
-import CharacterSingle from './CharacterSingle';
+import ACharacterSingle from './CharacterSingle';
 import Character from './Character';
-import Fanart from './Fanart';
+import Fanart from './Fanart'; 
 import Social from './Social';
 import Footer from './Footer';
 
@@ -16,9 +16,9 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/cra-Otakus-Akaibu" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/find_Acharacter/:id" element={<CharacterSingle />} />
+        <Route path="/find_Acharacter/:id" element={<ACharacterSingle />} />
         <Route path="/find_Acharacter" element={<Character />} />
         <Route path="/fanart" element={<Fanart />} />
         <Route path="/social" element={<Social />} />
